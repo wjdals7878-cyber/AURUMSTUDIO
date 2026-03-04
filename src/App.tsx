@@ -232,38 +232,104 @@ const Portfolio = ({ items }: { items: PortfolioItem[] }) => (
 
 const Gallery = () => {
   const images = [
-    '/input_file_0.png',
-    '/input_file_1.png',
-    '/input_file_2.png',
-    '/input_file_3.png'
+    { src: '/setup1.jpg', title: '현장 셋업 및 장비 구성', category: 'Setup' },
+    { src: '/setup2.jpg', title: '촬영 준비 및 조명 세팅', category: 'Production' },
+    { src: '/setup3.jpg', title: '디테일 모니터링', category: 'Directing' },
+    { src: '/setup4.jpg', title: '최종 촬영 진행', category: 'Shooting' }
   ];
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-zinc-950/20">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-sm font-bold text-brand uppercase tracking-widest mb-4">BEHIND THE SCENES</h2>
-          <h3 className="text-4xl md:text-5xl font-bold tracking-tight">현장의 순간들</h3>
+        <div className="mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
+          <div>
+            <h2 className="text-sm font-bold text-brand uppercase tracking-[0.3em] mb-4">BEHIND THE SCENES</h2>
+            <h3 className="text-4xl md:text-6xl font-black tracking-tighter">현장의 순간들</h3>
+          </div>
+          <p className="text-white/40 max-w-md text-right hidden md:block">
+            아우룸스튜디오는 모든 현장에서 최상의 퀄리티를 위해 <br />
+            작은 디테일 하나까지 놓치지 않습니다.
+          </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {images.map((src, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/40 backdrop-blur-sm"
-            >
-              <img 
-                src={src} 
-                className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
-                alt={`Studio moment ${i + 1}`}
-                referrerPolicy="no-referrer"
-              />
-            </motion.div>
-          ))}
+        
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
+          {/* Main Large Image */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="md:col-span-8 md:row-span-2 relative group rounded-3xl overflow-hidden border border-white/5"
+          >
+            <img 
+              src={images[0].src} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              alt={images[0].title}
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
+              <span className="text-xs font-bold text-brand uppercase tracking-widest mb-2">{images[0].category}</span>
+              <h4 className="text-3xl font-bold">{images[0].title}</h4>
+            </div>
+          </motion.div>
+
+          {/* Side Images */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="md:col-span-4 relative group rounded-3xl overflow-hidden border border-white/5"
+          >
+            <img 
+              src={images[1].src} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              alt={images[1].title}
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+              <span className="text-xs font-bold text-brand uppercase tracking-widest mb-1">{images[1].category}</span>
+              <h4 className="text-xl font-bold">{images[1].title}</h4>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="md:col-span-4 relative group rounded-3xl overflow-hidden border border-white/5"
+          >
+            <img 
+              src={images[2].src} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              alt={images[2].title}
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+              <span className="text-xs font-bold text-brand uppercase tracking-widest mb-1">{images[2].category}</span>
+              <h4 className="text-xl font-bold">{images[2].title}</h4>
+            </div>
+          </motion.div>
+
+          {/* Bottom Wide Image */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="md:col-span-12 relative group rounded-3xl overflow-hidden border border-white/5 h-[300px]"
+          >
+            <img 
+              src={images[3].src} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              alt={images[3].title}
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
+              <span className="text-xs font-bold text-brand uppercase tracking-widest mb-2">{images[3].category}</span>
+              <h4 className="text-2xl font-bold">{images[3].title}</h4>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
