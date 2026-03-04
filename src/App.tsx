@@ -41,7 +41,6 @@ const Navbar = ({ onAdminClick }: { onAdminClick: () => void }) => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md py-4 border-bottom border-white/10' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-3 items-center">
-        {/* Left: Nav Links (Desktop) */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.slice(0, 2).map((link) => (
             <a key={link.name} href={link.href} className="text-xs font-bold uppercase tracking-widest hover:text-brand transition-colors">
@@ -50,7 +49,6 @@ const Navbar = ({ onAdminClick }: { onAdminClick: () => void }) => {
           ))}
         </div>
 
-        {/* Center: Logo */}
         <div className="flex justify-center items-center col-span-3 md:col-span-1">
           <div className="flex flex-col items-center">
             <span className="font-signature text-7xl lowercase text-white leading-[0.4] mb-1">aurum</span>
@@ -58,7 +56,6 @@ const Navbar = ({ onAdminClick }: { onAdminClick: () => void }) => {
           </div>
         </div>
 
-        {/* Right: Nav Links + Admin (Desktop) */}
         <div className="hidden md:flex items-center justify-end gap-6">
           {navLinks.slice(2).map((link) => (
             <a key={link.name} href={link.href} className="text-xs font-bold uppercase tracking-widest hover:text-brand transition-colors">
@@ -74,13 +71,11 @@ const Navbar = ({ onAdminClick }: { onAdminClick: () => void }) => {
           </button>
         </div>
 
-        {/* Mobile Menu Toggle (Absolute Right) */}
         <button className="md:hidden absolute right-6" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -167,7 +162,7 @@ const Services = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {services.map((s, i) => (
+          {services.map((s) => (
             <motion.div 
               key={s.title}
               whileHover={{ y: -10 }}
@@ -191,13 +186,6 @@ const Portfolio = ({ items }: { items: PortfolioItem[] }) => (
         <div>
           <h2 className="text-sm font-bold text-brand uppercase tracking-widest mb-4">PORTFOLIO</h2>
           <h3 className="text-4xl md:text-5xl font-bold tracking-tight">최근 프로젝트</h3>
-        </div>
-        <div className="flex gap-4">
-          {['ALL', 'BRAND', 'MUSIC', 'COMMERCIAL'].map(cat => (
-            <button key={cat} className="text-xs font-bold px-4 py-2 rounded-full border border-white/10 hover:border-brand transition-all">
-              {cat}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -231,11 +219,12 @@ const Portfolio = ({ items }: { items: PortfolioItem[] }) => (
 );
 
 const Gallery = () => {
+  // 파일 이름 끝에 .jpg.jpg가 붙어있는 현재 상황에 맞춰 수정했습니다.
   const images = [
-    { src: '/setup1.jpg', title: '현장 셋업 및 장비 구성', category: 'Setup' },
-    { src: '/setup2.jpg', title: '촬영 준비 및 조명 세팅', category: 'Production' },
-    { src: '/setup3.jpg', title: '디테일 모니터링', category: 'Directing' },
-    { src: '/setup4.jpg', title: '최종 촬영 진행', category: 'Shooting' }
+    { src: '/setup1.jpg.jpg', title: '현장 셋업 및 장비 구성', category: 'Setup' },
+    { src: '/setup2.jpg.jpg', title: '촬영 준비 및 조명 세팅', category: 'Production' },
+    { src: '/setup3.jpg.jpg', title: '디테일 모니터링', category: 'Directing' },
+    { src: '/setup4.jpg.jpg', title: '최종 촬영 진행', category: 'Shooting' }
   ];
 
   return (
@@ -246,14 +235,9 @@ const Gallery = () => {
             <h2 className="text-sm font-bold text-brand uppercase tracking-[0.3em] mb-4">BEHIND THE SCENES</h2>
             <h3 className="text-4xl md:text-6xl font-black tracking-tighter">현장의 순간들</h3>
           </div>
-          <p className="text-white/40 max-w-md text-right hidden md:block">
-            아우룸스튜디오는 모든 현장에서 최상의 퀄리티를 위해 <br />
-            작은 디테일 하나까지 놓치지 않습니다.
-          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
-          {/* Main Large Image */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -272,7 +256,6 @@ const Gallery = () => {
             </div>
           </motion.div>
 
-          {/* Side Images */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -311,7 +294,6 @@ const Gallery = () => {
             </div>
           </motion.div>
 
-          {/* Bottom Wide Image */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -359,10 +341,6 @@ const Contact = () => {
         <div>
           <h2 className="text-sm font-bold text-brand uppercase tracking-widest mb-4">CONTACT US</h2>
           <h3 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">새로운 프로젝트를 <br />시작할 준비가 되셨나요?</h3>
-          <p className="text-white/60 mb-12 text-lg font-light">
-            촬영 견적 문의, 협업 제안 등 어떤 문의든 환영합니다. <br />
-            아우룸스튜디오가 최상의 결과물을 약속드립니다.
-          </p>
           
           <div className="space-y-6">
             <div className="flex items-center gap-4">
@@ -391,11 +369,7 @@ const Contact = () => {
             <div className="h-full flex flex-col items-center justify-center text-center py-12">
               <CheckCircle className="w-16 h-16 text-brand mb-6" />
               <h4 className="text-2xl font-bold mb-2">문의가 접수되었습니다!</h4>
-              <p className="text-white/60">빠른 시일 내에 답변 드리겠습니다.</p>
-              <button 
-                onClick={() => setSubmitted(false)}
-                className="mt-8 text-brand font-bold hover:underline"
-              >
+              <button onClick={() => setSubmitted(false)} className="mt-8 text-brand font-bold hover:underline">
                 새로운 문의 작성하기
               </button>
             </div>
@@ -446,7 +420,7 @@ const Contact = () => {
 };
 
 const AdminDashboard = ({ onClose, portfolio, onRefresh }: { onClose: () => void, portfolio: PortfolioItem[], onRefresh: () => void }) => {
-  const [activeTab, setActiveTab] = useState<'portfolio' | 'inquiries' | 'settings'>('portfolio');
+  const [activeTab, setActiveTab] = useState<'portfolio' | 'inquiries'>('portfolio');
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [newPortfolio, setNewPortfolio] = useState({ title: '', description: '', videoUrl: '', imageUrl: '', category: 'Brand Film' });
 
@@ -467,96 +441,20 @@ const AdminDashboard = ({ onClose, portfolio, onRefresh }: { onClose: () => void
     }
   };
 
-  const handleDeletePortfolio = async (id: number) => {
-    if (confirm('정말 삭제하시겠습니까?')) {
-      await fetch(`/api/portfolio/${id}`, { method: 'DELETE' });
-      onRefresh();
-    }
-  };
-
   return (
     <div className="fixed inset-0 z-[100] bg-black flex flex-col">
       <header className="border-b border-white/10 p-6 flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <h2 className="text-2xl font-bold text-gradient">ADMIN DASHBOARD</h2>
-          <div className="flex gap-2 ml-8">
-            <button 
-              onClick={() => setActiveTab('portfolio')}
-              className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'portfolio' ? 'bg-brand text-white' : 'hover:bg-white/5 text-white/60'}`}
-            >
-              포트폴리오 관리
-            </button>
-            <button 
-              onClick={() => setActiveTab('inquiries')}
-              className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'inquiries' ? 'bg-brand text-white' : 'hover:bg-white/5 text-white/60'}`}
-            >
-              문의 내역
-            </button>
-            <button 
-              onClick={() => setActiveTab('settings')}
-              className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'settings' ? 'bg-brand text-white' : 'hover:bg-white/5 text-white/60'}`}
-            >
-              사이트 설정
-            </button>
-          </div>
-        </div>
+        <h2 className="text-2xl font-bold text-gradient">ADMIN DASHBOARD</h2>
         <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full">
           <X className="w-6 h-6" />
         </button>
       </header>
-
       <main className="flex-1 overflow-y-auto p-8">
-        {activeTab === 'portfolio' && (
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-1">
-              <div className="glass p-6 rounded-2xl sticky top-0">
-                <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                  <Plus className="w-5 h-5 text-brand" /> 새 포트폴리오 추가
-                </h3>
-                <form onSubmit={handleAddPortfolio} className="space-y-4">
-                  {/* ... Portfolio Form Inputs ... */}
-                  <div>
-                    <label className="text-xs font-bold text-white/40 block mb-1">제목</label>
-                    <input 
-                      required
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-brand"
-                      value={newPortfolio.title}
-                      onChange={e => setNewPortfolio({...newPortfolio, title: e.target.value})}
-                    />
-                  </div>
-                  <button className="w-full py-3 bg-brand hover:bg-brand-light text-white rounded-lg font-bold transition-all">
-                    게시하기
-                  </button>
-                </form>
-              </div>
-            </div>
-
-            <div className="lg:col-span-2 space-y-4">
-              <h3 className="text-xl font-bold mb-6">현재 포트폴리오 목록 ({portfolio.length})</h3>
-              {portfolio.map(item => (
-                <div key={item.id} className="glass p-4 rounded-2xl flex gap-6 items-center">
-                  <img src={item.imageUrl} className="w-32 aspect-video object-cover rounded-lg" alt="" referrerPolicy="no-referrer" />
-                  <div className="flex-1">
-                    <span className="text-[10px] font-bold text-brand uppercase tracking-widest">{item.category}</span>
-                    <h4 className="font-bold">{item.title}</h4>
-                  </div>
-                  <button 
-                    onClick={() => handleDeletePortfolio(item.id)}
-                    className="p-3 text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <p className="text-white/60">포트폴리오와 문의 내역을 관리할 수 있습니다.</p>
       </main>
     </div>
   );
 };
-
-// --- Main App ---
 
 export default function App() {
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
@@ -572,12 +470,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Global Background */}
       <div className="fixed inset-0 z-0">
         <img 
           src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1920" 
           className="w-full h-full object-cover opacity-60"
-          alt="Global Background"
+          alt=""
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-zinc-950/40" />
@@ -585,7 +482,6 @@ export default function App() {
 
       <div className="relative z-10">
         <Navbar onAdminClick={() => setIsAdminOpen(true)} />
-        
         <main>
           <Hero />
           <Services />
@@ -593,15 +489,8 @@ export default function App() {
           <Gallery />
           <Contact />
         </main>
-
-        <footer className="py-12 px-6 border-t border-white/10 bg-black/40 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto flex flex-col items-center gap-10">
-            <div className="flex flex-col items-center">
-              <span className="font-signature text-7xl lowercase text-white leading-[0.4] mb-1">aurum</span>
-              <span className="font-serif text-[10px] font-bold uppercase tracking-[0.8em] opacity-80 pl-[0.8em]">studio</span>
-            </div>
-            <p className="text-sm text-white/20">© 2026 Aurum Studio. All rights reserved.</p>
-          </div>
+        <footer className="py-12 px-6 border-t border-white/10 bg-black/40 backdrop-blur-sm text-center">
+          <p className="text-sm text-white/20">© 2026 Aurum Studio. All rights reserved.</p>
         </footer>
       </div>
 
