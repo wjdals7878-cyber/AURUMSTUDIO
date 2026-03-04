@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Cinzel:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-signature: "Herr Von Muellerhoff", cursive;
+  --font-serif: "Cinzel", serif;
+  --color-brand: #FFFFFF;
+  --color-brand-light: #F0F0F0;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased;
+  }
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+.purple-glow {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.text-gradient {
+  @apply text-white;
+}
