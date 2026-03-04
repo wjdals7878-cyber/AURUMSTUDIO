@@ -1,48 +1,89 @@
-// ... 상단 import 생략 (기존과 동일) ...
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { 
+  Play, 
+  Menu, 
+  X, 
+  Instagram, 
+  Youtube, 
+  Mail, 
+  ArrowRight, 
+  LayoutDashboard, 
+  Plus, 
+  Trash2, 
+  CheckCircle,
+  Video,
+  Settings
+} from 'lucide-react';
 
-const Gallery = () => {
-  // 사진 파일이 public 폴더 안에 있고, 이름이 setup1.jpg.jpg 일 때의 경로입니다.
-  const images = [
-    { src: '/setup1.jpg.jpg', title: '현장 셋업 및 장비 구성', category: 'Setup' },
-    { src: '/setup2.jpg.jpg', title: '촬영 준비 및 조명 세팅', category: 'Production' },
-    { src: '/setup3.jpg.jpg', title: '디테일 모니터링', category: 'Directing' },
-    { src: '/setup4.jpg.jpg', title: '최종 촬영 진행', category: 'Shooting' }
+// --- Types ---
+interface PortfolioItem {
+  id: number;
+  title: string;
+  description: string;
+  videoUrl: string;
+  imageUrl: string;
+  category: string;
+}
+
+interface Inquiry {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  status: string;
+  createdAt: string;
+}
+
+// --- Components ---
+
+const Navbar = ({ onAdminClick }: { onAdminClick: () => void }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: '홈', href: '#home' },
+    { name: '서비스', href: '#services' },
+    { name: '포트폴리오', href: '#portfolio' },
+    { name: '문의하기', href: '#contact' },
   ];
 
   return (
-    <section className="py-24 px-6 bg-zinc-950/20">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
-          <div>
-            <h2 className="text-sm font-bold text-brand uppercase tracking-[0.3em] mb-4">BEHIND THE SCENES</h2>
-            <h3 className="text-4xl md:text-6xl font-black tracking-tighter">현장의 순간들</h3>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md py-4 border-b border-white/10' : 'bg-transparent py-6'}`}>
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-3 items-center">
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.slice(0, 2).map((link) => (
+            <a key={link.name} href={link.href} className="text-xs font-bold uppercase tracking-widest hover:text-brand transition-colors text-white">
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        <div className="flex justify-center items-center col-span-3 md:col-span-1">
+          <div className="flex flex-col items-center">
+            <span className="font-signature text-7xl lowercase text-white leading-[0.4] mb-1">aurum</span>
+            <span className="font-serif text-[10px] font-bold uppercase tracking-[0.8em] text-white opacity-80 pl-[0.8em]">studio</span>
           </div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
-          {/* 메인 큰 이미지 */}
-          <motion.div className="md:col-span-8 md:row-span-2 relative group rounded-3xl overflow-hidden border border-white/5">
-            <img src={images[0].src} className="w-full h-full object-cover" alt="" referrerPolicy="no-referrer" />
-          </motion.div>
 
-          {/* 오른쪽 위 이미지 */}
-          <motion.div className="md:col-span-4 relative group rounded-3xl overflow-hidden border border-white/5">
-            <img src={images[1].src} className="w-full h-full object-cover" alt="" referrerPolicy="no-referrer" />
-          </motion.div>
-
-          {/* 오른쪽 아래 이미지 */}
-          <motion.div className="md:col-span-4 relative group rounded-3xl overflow-hidden border border-white/5">
-            <img src={images[2].src} className="w-full h-full object-cover" alt="" referrerPolicy="no-referrer" />
-          </motion.div>
-
-          {/* 하단 긴 이미지 */}
-          <motion.div className="md:col-span-12 relative group rounded-3xl overflow-hidden border border-white/5 h-[300px]">
-            <img src={images[3].src} className="w-full h-full object-cover" alt="" referrerPolicy="no-referrer" />
-          </motion.div>
+        <div className="hidden md:flex items-center justify-end gap-6">
+          {navLinks.slice(2).map((link) => (
+            <a key={link.name} href={link.href} className="text-xs font-bold uppercase tracking-widest hover:text-brand transition-colors text-white">
+              {link.name}
+            </a>
+          ))}
+          <button 
+            onClick={onAdminClick}
+            className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
+          >
+            <LayoutDashboard className="w-4 h-4" />
+          </button>
         </div>
-      </div>
-    </section>
-  );
-};
 
-// ... 하단 App 컴포넌트 생략 (기존과 동일) ...
+        <button className="md:hidden
